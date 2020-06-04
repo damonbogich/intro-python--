@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 #steps:
     #Create Room and player classes in their files... done for now
     #figure out how to get the rooms in the room dictionary to be instances of Room class... added through dictionary
@@ -12,7 +13,7 @@ from player import Player
 #I think this is a dictionary called room where the key is the string and the value is an instance of room class
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons", [Item('Rock', 'Big big rock'), Item('Another rock', 'even bigger rock')]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -61,23 +62,30 @@ room['treasure'].s_to = room['narrow']
 #
 # If the user enters "q", quit the game.
 
-damon = Player('Damon', room['outside'])
-
+damon = Player('Damon', room['outside'], [Item('Sword', 'This sword cuts through butter like steel')])
+# damon.get_item()
 def game(player= damon):
     #make this in loop format:
     while(True):
         #print current room name
         # print((f'{player.current_room.name.s_to}')) --experiment with putting these in the class person later
+        # print (f'Player items: {player.items[0].name}')
+        
         print((f'{player.current_room.name}'))
         #current room desc
         print(f'{player.current_room.description}')
+        #print items in the room:
+        player.list_items()
+        player.current_room.list_items()
+        player.get_item()
+        player.list_items()
         #waits for user input and decides what direction to move
-        direction = input('Which way would you like to move?: ')
+        direction = input('Which way would you like to move?(n,e,s,w): ')
         print(f'current room:{player.current_room.name}, current direction: {direction} ')
         #set conditionals allowing player to move from room to room
         if direction == 'q':
             break
-        elif player.current_room.name == 'Outside Cave Entrance'  and direction == 'n':
+        elif player.current_room.name == 'Outside Cave Entrance'  and direction == 'n' :
             player.current_room = player.current_room.n_to
         elif player.current_room.name == 'Outside Cave Entrance' and direction == 'e':
             print('can not move east from here')
