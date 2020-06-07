@@ -16,7 +16,7 @@ room = {
                      "North of you, the cave mount beckons", [Item('Rock', 'Big big rock'), Item('Another rock', 'even bigger rock')]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", [Item('Grand Piano', 'A big musical instrument'), Item('Air Jordans', 'Shoes that are light sleek and expensive')]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
@@ -79,6 +79,8 @@ def game(player= damon):
         player.current_room.list_items()
         player.get_item()
         player.list_items()
+        player.drop_item()
+        player.current_room.list_items()
         #waits for user input and decides what direction to move
         direction = input('Which way would you like to move?(n,e,s,w): ')
         print(f'current room:{player.current_room.name}, current direction: {direction} ')
@@ -181,4 +183,4 @@ game()
 
         #foyer problems: south function returns line 111, direction set to w returns line 111
         #tried the following as: if player.current_room.name == 'Outside Cave Entrance' or player.current_room.name == 'Foyer' and it did not work... why???
-game()
+

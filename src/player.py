@@ -23,17 +23,28 @@ class Player:
         #function will add item to players list from the room it's in if the user invokes it
         for item in self.current_room.items:
             #set variable for what's typed into parser
-            pickup_option = input(f'If you wish to pickup any items from {self.current_room.name} type: get and the exact name of the item: ')
+            pickup_option = input(f'If you wish to pickup any items from {self.current_room.name} type the exact name of the item: ')
             # if pickup option == item.name:
             if pickup_option == item.name:
                 print(f'you now have {item.name}')
                 #add item to your list:
                 self.items.append(item)
-                break
+                for i in self.current_room.items:
+                    if i.name == pickup_option:
+                        self.current_room.items.remove(i)
+                    else: 
+                        break
+            
 
                 
-            #   remove item.name from current_room instance items
-            #   add item.name to player instance
+            # now player can pickup items from a room, but still need logic for if the user types in something that doesn't match
+    #function for player to drop items
+    
+        
+                
+
+
+        
             
         
 
